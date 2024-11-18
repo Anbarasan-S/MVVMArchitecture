@@ -27,7 +27,7 @@ git clone https://github.com/yourusername/MVVM-Todo-Sample.git
 cd MVVMArchitecture
 open MVVMArchitecture.xcodeproj
 
-**3. Build and run the app on the iOS Simulator.**
+**3. Build and run the app.**
 
 **Dependencies**
 
