@@ -14,6 +14,7 @@ class TodoViewController: UIViewController {
     private lazy var collectionView = {
         let aView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         aView.translatesAutoresizingMaskIntoConstraints = false
+        aView.contentInset = .zero
         return aView
     }()
     private var dataSource: UICollectionViewDiffableDataSource<Section, String>?
@@ -60,16 +61,20 @@ class TodoViewController: UIViewController {
     }
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout{[unowned self] section, layoutEnvironment -> NSCollectionLayoutSection? in
-            let listConfig = getListConfiguration()
+            let listConfig = getListConfiguration(for: section)
             let section = NSCollectionLayoutSection.list(using: listConfig, layoutEnvironment: layoutEnvironment)
             return section
         }
         return layout
     }
     
-    private func getListConfiguration() -> UICollectionLayoutListConfiguration {
+    private func getListConfiguration(for section: Int) -> UICollectionLayoutListConfiguration {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-        configuration.headerMode = .supplementary
+        if let sectionIdentifier = dataSource?.sectionIdentifier(for: section) {
+            if let itemIdentifiers = dataSource?.snapshot().itemIdentifiers(inSection: sectionIdentifier), itemIdentifiers.isEmpty == false {
+                configuration.headerMode = .firstItemInSection
+            }
+        }
         return configuration
     }
     
@@ -79,7 +84,7 @@ class TodoViewController: UIViewController {
                 return collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
             }
             if let todoModel = dataStore[itemIdentifier] {
-                cell.setData(title: todoModel.title, isCompleted: todoModel.completed)
+                cell.setData(title: todoModel.title, isCompleted: todoModel.completed, isFirstItem: indexPath.row == 0)
             }
             return cell
         }

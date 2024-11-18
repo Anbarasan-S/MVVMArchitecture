@@ -29,8 +29,10 @@ class TodoCollectionViewListCell: UICollectionViewListCell {
     }
     
     //MARK: PRIVATE METHODS
+    private lazy var separatorLayoutLeadingAnchorConstraint: NSLayoutConstraint? = separatorLayoutGuide.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
     private func viewConfig() {
         contentView.addSubview(label)
+        separatorLayoutLeadingAnchorConstraint?.isActive = true
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: PaddingConstants.TodoCell.vertical),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: PaddingConstants.TodoCell.horizontal),
@@ -40,7 +42,17 @@ class TodoCollectionViewListCell: UICollectionViewListCell {
     }
     
     //MARK: PUBLIC METHODS
-    func setData(title: String, isCompleted: Bool) {
+    func setData(title: String, isCompleted: Bool, isFirstItem: Bool) {
         label.text = title
+        if isFirstItem {
+            separatorLayoutLeadingAnchorConstraint?.isActive = false
+            separatorLayoutLeadingAnchorConstraint?.constant = 1000000
+            separatorLayoutLeadingAnchorConstraint?.isActive = true
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        separatorLayoutLeadingAnchorConstraint?.constant = 10
     }
 }
