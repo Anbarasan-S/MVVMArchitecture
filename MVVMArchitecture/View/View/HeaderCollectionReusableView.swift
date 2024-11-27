@@ -14,12 +14,15 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemGray
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
     
     //MARK: PRIVATE METHODS
     private func viewConfig() {
         addSubview(titleLabel)
+        backgroundColor = .white
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)

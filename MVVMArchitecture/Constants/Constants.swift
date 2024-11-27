@@ -18,3 +18,8 @@ struct PaddingConstants {
 struct NetworkConstants {
     static let getTodoUrl = "https://jsonplaceholder.typicode.com/todos"
 }
+
+
+struct DatabaseConstants {
+    static let todoDatabaseName = "ToDoMVVMArchitecture"
+}

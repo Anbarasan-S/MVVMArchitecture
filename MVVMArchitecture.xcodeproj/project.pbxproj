@@ -23,6 +23,11 @@
 		6BF077C42CE422BD003D348D /* TodoNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF077C32CE422BD003D348D /* TodoNetworkService.swift */; };
 		6BF077C62CE424F2003D348D /* TodoNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF077C52CE424F2003D348D /* TodoNetworkError.swift */; };
 		6BF077C82CE42526003D348D /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF077C72CE42526003D348D /* TodoViewModel.swift */; };
+		97C4D8322CEF7F7B005A7BF3 /* ToDoMVVMArchitecture.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 97C4D8302CEF7F7B005A7BF3 /* ToDoMVVMArchitecture.xcdatamodeld */; };
+		97C4D8342CEF8060005A7BF3 /* TodoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C4D8332CEF8052005A7BF3 /* TodoInputViewController.swift */; };
+		97C4D8392CEF810C005A7BF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 97C4D8372CEF810C005A7BF3 /* Localizable.strings */; };
+		97C4D83B2CEF81CB005A7BF3 /* TodoDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C4D83A2CEF81C3005A7BF3 /* TodoDatabaseService.swift */; };
+		97C4D83D2CEF81F8005A7BF3 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C4D83C2CEF81F0005A7BF3 /* DatabaseService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +68,11 @@
 		6BF077C32CE422BD003D348D /* TodoNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNetworkService.swift; sourceTree = "<group>"; };
 		6BF077C52CE424F2003D348D /* TodoNetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNetworkError.swift; sourceTree = "<group>"; };
 		6BF077C72CE42526003D348D /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
+		97C4D8312CEF7F7B005A7BF3 /* ToDoMVVMArchitecture.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoMVVMArchitecture.xcdatamodel; sourceTree = "<group>"; };
+		97C4D8332CEF8052005A7BF3 /* TodoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputViewController.swift; sourceTree = "<group>"; };
+		97C4D8382CEF810C005A7BF3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		97C4D83A2CEF81C3005A7BF3 /* TodoDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDatabaseService.swift; sourceTree = "<group>"; };
+		97C4D83C2CEF81F0005A7BF3 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +123,7 @@
 		6BF077802CE2E2A5003D348D /* MVVMArchitecture */ = {
 			isa = PBXGroup;
 			children = (
+				97C4D8302CEF7F7B005A7BF3 /* ToDoMVVMArchitecture.xcdatamodeld */,
 				6BF077C22CE4229C003D348D /* ServiceHelper */,
 				6BF077BB2CE2E936003D348D /* Constants */,
 				6BF077B32CE2E2C8003D348D /* ViewModel */,
@@ -124,6 +135,7 @@
 				6BF0778A2CE2E2A7003D348D /* Assets.xcassets */,
 				6BF0778C2CE2E2A7003D348D /* LaunchScreen.storyboard */,
 				6BF0778F2CE2E2A7003D348D /* Info.plist */,
+				97C4D8372CEF810C005A7BF3 /* Localizable.strings */,
 			);
 			path = MVVMArchitecture;
 			sourceTree = "<group>";
@@ -156,6 +168,7 @@
 		6BF077B22CE2E2C2003D348D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				97C4D8332CEF8052005A7BF3 /* TodoInputViewController.swift */,
 				6BF077BE2CE41BA0003D348D /* View */,
 				6BF077B82CE2E6CA003D348D /* Cell */,
 				6BF077B62CE2E40A003D348D /* TodoViewController.swift */,
@@ -198,6 +211,8 @@
 		6BF077C22CE4229C003D348D /* ServiceHelper */ = {
 			isa = PBXGroup;
 			children = (
+				97C4D83C2CEF81F0005A7BF3 /* DatabaseService.swift */,
+				97C4D83A2CEF81C3005A7BF3 /* TodoDatabaseService.swift */,
 				6BF077C32CE422BD003D348D /* TodoNetworkService.swift */,
 				6BF077C52CE424F2003D348D /* TodoNetworkError.swift */,
 			);
@@ -309,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BF0778B2CE2E2A7003D348D /* Assets.xcassets in Resources */,
+				97C4D8392CEF810C005A7BF3 /* Localizable.strings in Resources */,
 				6BF0778E2CE2E2A7003D348D /* Base in Resources */,
 				6BF077892CE2E2A5003D348D /* Base in Resources */,
 			);
@@ -336,12 +352,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BF077C02CE41BBE003D348D /* HeaderCollectionReusableView.swift in Sources */,
+				97C4D8342CEF8060005A7BF3 /* TodoInputViewController.swift in Sources */,
 				6BF077B72CE2E40A003D348D /* TodoViewController.swift in Sources */,
 				6BF077C62CE424F2003D348D /* TodoNetworkError.swift in Sources */,
 				6BF077BA2CE2E753003D348D /* TodoCollectionViewListCell.swift in Sources */,
 				6BF077B52CE2E31A003D348D /* TodoModel.swift in Sources */,
 				6BF077BD2CE2E948003D348D /* Constants.swift in Sources */,
+				97C4D8322CEF7F7B005A7BF3 /* ToDoMVVMArchitecture.xcdatamodeld in Sources */,
+				97C4D83D2CEF81F8005A7BF3 /* DatabaseService.swift in Sources */,
 				6BF077822CE2E2A5003D348D /* AppDelegate.swift in Sources */,
+				97C4D83B2CEF81CB005A7BF3 /* TodoDatabaseService.swift in Sources */,
 				6BF077C42CE422BD003D348D /* TodoNetworkService.swift in Sources */,
 				6BF077C82CE42526003D348D /* TodoViewModel.swift in Sources */,
 				6BF077842CE2E2A5003D348D /* SceneDelegate.swift in Sources */,
@@ -395,6 +415,14 @@
 				6BF0778D2CE2E2A7003D348D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		97C4D8372CEF810C005A7BF3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				97C4D8382CEF810C005A7BF3 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -526,6 +554,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 795JPAQF7W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MVVMArchitecture/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -533,6 +562,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -553,6 +583,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 795JPAQF7W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MVVMArchitecture/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -560,6 +591,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -685,6 +717,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		97C4D8302CEF7F7B005A7BF3 /* ToDoMVVMArchitecture.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				97C4D8312CEF7F7B005A7BF3 /* ToDoMVVMArchitecture.xcdatamodel */,
+			);
+			currentVersion = 97C4D8312CEF7F7B005A7BF3 /* ToDoMVVMArchitecture.xcdatamodel */;
+			path = ToDoMVVMArchitecture.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6BF077762CE2E2A5003D348D /* Project object */;
 }

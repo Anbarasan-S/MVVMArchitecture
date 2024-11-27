@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 class TodoViewController: UIViewController {
     
@@ -14,7 +13,7 @@ class TodoViewController: UIViewController {
     private lazy var collectionView = {
         let aView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         aView.translatesAutoresizingMaskIntoConstraints = false
-        aView.contentInset = .zero
+        aView.delegate = self
         return aView
     }()
     private var dataSource: UICollectionViewDiffableDataSource<Section, String>?
@@ -45,13 +44,19 @@ class TodoViewController: UIViewController {
         viewConfig()
         configureDataSource()
         todoViewModel.bindTodoViewModelToController = todoViewModelCompletionHandler
+        todoViewModel.bindErrorToController = todoErrorCompletionHandler
         todoViewModel.fetchOnlineTasks()
+        todoViewModel.fetchOfflineTasks()
     }
     
     //MARK: PRIVATE UI METHOD
     private func viewConfig() {
         view.backgroundColor = .white
         view.addSubview(collectionView)
+        navigationItem.title = "Todo List"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didAddTaskTapped))
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -63,6 +68,7 @@ class TodoViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout{[unowned self] section, layoutEnvironment -> NSCollectionLayoutSection? in
             let listConfig = getListConfiguration(for: section)
             let section = NSCollectionLayoutSection.list(using: listConfig, layoutEnvironment: layoutEnvironment)
+            section.contentInsets.top = 10
             return section
         }
         return layout
@@ -72,9 +78,10 @@ class TodoViewController: UIViewController {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         if let sectionIdentifier = dataSource?.sectionIdentifier(for: section) {
             if let itemIdentifiers = dataSource?.snapshot().itemIdentifiers(inSection: sectionIdentifier), itemIdentifiers.isEmpty == false {
-                configuration.headerMode = .firstItemInSection
+                configuration.headerMode = .supplementary
             }
         }
+        
         return configuration
     }
     
@@ -84,7 +91,7 @@ class TodoViewController: UIViewController {
                 return collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
             }
             if let todoModel = dataStore[itemIdentifier] {
-                cell.setData(title: todoModel.title, isCompleted: todoModel.completed, isFirstItem: indexPath.row == 0)
+                cell.setData(title: todoModel.title, isCompleted: todoModel.completed)
             }
             return cell
         }
@@ -131,10 +138,61 @@ class TodoViewController: UIViewController {
     //MARK: PRIVATE DATA METHODS
     private func todoViewModelCompletionHandler() {
         todoModels[.online] = todoViewModel.onlineTasks
+        todoModels[.offline] = todoViewModel.offlineTasks
         todoModels[.online]?.forEach{
+            dataStore["\($0.id)"] = $0
+        }
+        todoModels[.offline]?.forEach{
             dataStore["\($0.id)"] = $0
         }
         applySnapshot()
     }
     
+    private func todoErrorCompletionHandler(_ todoError: TodoError) {
+        var title = ""
+        var description = ""
+        switch todoError {
+        case .noInternet:
+            title = "No Internet"
+            description = "Please Check Your Internet Connection and Try Again"
+        case .networkLost:
+            title = "Network Lost"
+            description = "Please Check Your Internet Connection and Try Again"
+        case .requestTimeout:
+            title = "Request Timeout"
+            description = "Please Try again later"
+        case .unknownError:
+            title = "Something Went Wrong"
+            description = "Please Try again later"
+        }
+        let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
+    }
+    
+    //MARK: Selector Methods
+    @objc private func didAddTaskTapped() {
+        let todoInputViewController = TodoInputViewController()
+        todoInputViewController.todoInputViewDelegate = self
+        todoInputViewController.modalPresentationStyle = .automatic
+        if let sheet = todoInputViewController.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.preferredCornerRadius = 20
+        }
+        self.present(todoInputViewController, animated: true)
+    }
+}
+
+extension TodoViewController: TodoInputViewDelegate {
+    func saveTapped(taskTitle: String, completed: Bool) {
+        todoViewModel.saveTodo(title: taskTitle, completed: completed)
+    }
+}
+
+
+extension TodoViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
 }

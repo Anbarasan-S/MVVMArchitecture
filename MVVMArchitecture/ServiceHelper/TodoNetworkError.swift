@@ -7,6 +7,9 @@
 
 import Foundation
 
-enum TodoNetworkError: Error {
-    case invalidUrl
+enum TodoError: Error {
+    case noInternet
+    case networkLost
+    case requestTimeout
+    case unknownError
 }

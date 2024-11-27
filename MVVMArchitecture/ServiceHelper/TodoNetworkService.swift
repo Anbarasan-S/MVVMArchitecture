@@ -16,7 +16,7 @@ struct TodoNetworkService {
             let todoModels = try JSONDecoder().decode([TodoModel].self, from: result.0)
             return todoModels
         } else {
-            throw TodoNetworkError.invalidUrl
+            throw TodoError.unknownError
         }
     }
 }
